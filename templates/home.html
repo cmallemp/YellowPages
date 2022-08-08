@@ -1,0 +1,156 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>Yellow Pages Web Application</h1>
+    <br><br>
+
+    <div>
+        <h3>Search</h3>
+        <br><br>
+
+        <form method="post">
+            <label> Search By: (Company Name, Email, Phone number, Address)</label><br><br>
+            <input type="text" name="sea_trm" />
+            <input type="hidden" name="type" value="search" /><br><br>
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+
+    <br><br>
+
+    <div>
+        <h3>Results</h3>
+        <br><br>
+
+        <div>
+            <table>
+                <th>
+                    <tr>
+                        <td>ID</td>
+                        <td>Company Name</td>
+                        <td>Company Mobile</td>
+                        <td>Company Email</td>
+                        <td>Company Address</td>
+                    </tr>
+                </th>
+
+                {% for i in content[2] %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{i.cname}}</td>
+                    <td>{{i.mobile}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.address}}</td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="type" value="edit"></input>
+                            <input type="hidden" name="id" value="{{i.id}}"></input>
+                            <input type="submit" value="Edit" />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="type" value="delete"></input>
+                            <input type="hidden" name="id" value="{{i.id}}"></input>
+                            <input type="submit" value="Delete" />
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <br><br>
+
+    <div>
+        <h3> Add Company</h3>
+        <form method="post">
+            <label>Company name:</label>
+            <input type="text" name="cname" />
+            <br />
+            <label>Email ID:</label>
+            <input type="email" name="emailid" />
+            <br />
+            <label>Phone Number:</label>
+            <input type="number" name="mobile" />
+            <br />
+            <label>Address:</label>
+            <input type="text" name="address" />
+            <input type="hidden" name="type" value="additem" />
+            <br />
+
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+
+    <div>
+        <table>
+            <th>
+            <td>ID</td>
+            <td>Company Name</td>
+            <td>Company Mobile</td>
+            <td>Company Email</td>
+            <td>Company Address</td>
+            </th>
+
+            {% for i in content[0] %}
+            <tr>
+                <td></td>
+                <td>{{i.id}}</td>
+                <td>{{i.cname}}</td>
+                <td>{{i.mobile}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.address}}</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="type" value="edit"></input>
+                        <input type="hidden" name="id" value="{{i.id}}"></input>
+                        <input type="submit" value="Edit" />
+                    </form>
+                </td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="type" value="delete"></input>
+                        <input type="hidden" name="id" value="{{i.id}}"></input>
+                        <input type="submit" value="Delete" />
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+
+        {% if content[1] != "" %}
+        <h3> Edit Company </h3>
+        <h3>Edit id: {{content[1]}}</h3>
+        <div>
+            <form method="post">
+                <label>Company name:</label>
+                <input type="text" name="cname" />
+                <br />
+                <label>Email ID:</label>
+                <input type="email" name="emailid" />
+                <br />
+                <label>Phone Number:</label>
+                <input type="number" name="mobile" />
+                <br />
+                <label>Address:</label>
+                <input type="text" name="address" />
+                <br />
+                <input type="hidden" name="type" value="edit_id"></input>
+                <input type="hidden" name="id" value="{{content[1]}}"></input>
+                <br />
+                <input type="submit" />
+            </form>
+        </div>
+
+        {% endif %}
+    </div>
+</body>
+
+</html>
